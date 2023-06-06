@@ -1,5 +1,5 @@
 function [isFinish, angle, code] = isBarcodeDecoded(img_b, x, angle, printToConsole)
-    try
+%     try
         x = round(x);
         img_line = img_b(x, :); % predstavlja samo sliku na toj liniji koja preseca barkod
         %img_line = im2bw(img_line);
@@ -90,7 +90,7 @@ function [isFinish, angle, code] = isBarcodeDecoded(img_b, x, angle, printToCons
 
         %% Nalazenje trajanje segmenata u pikselima
                 % ovo moze da pravi opasan problem
-        [one_bar_arr, two_bar_arr, three_bar_arr, four_bar_arr] = getBarAray(duzine_sort);
+        [one_bar_arr, two_bar_arr, three_bar_arr, four_bar_arr] = getBarArray(duzine_sort);
         %% Rucni rezim
         % one_bar_arr = duzine_sort(1:35);
         % two_bar_arr =  duzine_sort(36:49);
@@ -237,10 +237,10 @@ function [isFinish, angle, code] = isBarcodeDecoded(img_b, x, angle, printToCons
             end
             isFinish = false;
         end
-    catch
-        isFinish = false;
-        code = "ERROR";
-        angle = 0;
-    end
+%     catch
+%         isFinish = false;
+%         code = "ERROR";
+%         angle = 0;
+%     end
 end
 

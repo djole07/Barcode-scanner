@@ -15,4 +15,3 @@ function num = decode_R(number_code)
     tmp = sum((numbers == number_code),2);
     num = find(tmp == 7) - 1;
 end
-

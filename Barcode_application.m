@@ -1,35 +1,35 @@
-function varargout = Barkod_aplikacija(varargin)
-% BARKOD_APLIKACIJA MATLAB code for Barkod_aplikacija.fig
-%      BARKOD_APLIKACIJA, by itself, creates a new BARKOD_APLIKACIJA or raises the existing
+function varargout = Barcode_application(varargin)
+% BARCODE_APPLICATION MATLAB code for Barcode_application.fig
+%      BARCODE_APPLICATION, by itself, creates a new BARCODE_APPLICATION or raises the existing
 %      singleton*.
 %
-%      H = BARKOD_APLIKACIJA returns the handle to a new BARKOD_APLIKACIJA or the handle to
+%      H = BARCODE_APPLICATION returns the handle to a new BARCODE_APPLICATION or the handle to
 %      the existing singleton*.
 %
-%      BARKOD_APLIKACIJA('CALLBACK',hObject,eventData,handles,...) calls the local
-%      function named CALLBACK in BARKOD_APLIKACIJA.M with the given input arguments.
+%      BARCODE_APPLICATION('CALLBACK',hObject,eventData,handles,...) calls the local
+%      function named CALLBACK in BARCODE_APPLICATION.M with the given input arguments.
 %
-%      BARKOD_APLIKACIJA('Property','Value',...) creates a new BARKOD_APLIKACIJA or raises the
+%      BARCODE_APPLICATION('Property','Value',...) creates a new BARCODE_APPLICATION or raises the
 %      existing singleton*.  Starting from the left, property value pairs are
-%      applied to the GUI before Barkod_aplikacija_OpeningFcn gets called.  An
+%      applied to the GUI before Barcode_application_OpeningFcn gets called.  An
 %      unrecognized property name or invalid value makes property application
-%      stop.  All inputs are passed to Barkod_aplikacija_OpeningFcn via varargin.
+%      stop.  All inputs are passed to Barcode_application_OpeningFcn via varargin.
 %
 %      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
 %      instance to run (singleton)".
 %
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
-% Edit the above text to modify the response to help Barkod_aplikacija
+% Edit the above text to modify the response to help Barcode_application
 
-% Last Modified by GUIDE v2.5 05-Jun-2023 16:24:13
+% Last Modified by GUIDE v2.5 06-Jun-2023 10:51:42
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @Barkod_aplikacija_OpeningFcn, ...
-                   'gui_OutputFcn',  @Barkod_aplikacija_OutputFcn, ...
+                   'gui_OpeningFcn', @Barcode_application_OpeningFcn, ...
+                   'gui_OutputFcn',  @Barcode_application_OutputFcn, ...
                    'gui_LayoutFcn',  [] , ...
                    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
@@ -44,22 +44,22 @@ end
 % End initialization code - DO NOT EDIT
 
 
-% --- Executes just before Barkod_aplikacija is made visible.
-function Barkod_aplikacija_OpeningFcn(hObject, eventdata, handles, varargin)
+% --- Executes just before Barcode_application is made visible.
+function Barcode_application_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-% varargin   command line arguments to Barkod_aplikacija (see VARARGIN)
+% varargin   command line arguments to Barcode_application (see VARARGIN)
 
 
-% Choose default command line output for Barkod_aplikacija
+% Choose default command line output for Barcode_application
 handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
 
-% UIWAIT makes Barkod_aplikacija wait for user response (see UIRESUME)
+% UIWAIT makes Barcode_application wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 set(findobj('Tag','text_barcode'),'String', "");
 axes(handles.axes_image);
@@ -69,7 +69,7 @@ axis off;       % ne prikazuje prazan koordinatni sistem pri pokretanju aplikaci
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = Barkod_aplikacija_OutputFcn(hObject, eventdata, handles) 
+function varargout = Barcode_application_OutputFcn(hObject, eventdata, handles) 
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -93,11 +93,11 @@ set(findobj('Tag','text_barcode'),'String', "");    % briše prethodni ispis na 
 {'*.jpg;*.jpeg;*.png;*.jpg;*.jpeg;*.png',...
     'Image Files (*.jpg;*.jpeg;*.png)';
    '*.*',  'All Files (*.*)'}, ...
-   'Izaberite fajl');
+   'Select an image');
 if isequal(file,0)
 %     msgbox('Niste izabrali sliku.');
         set(findobj('Tag','text_barcode'),'String',...
-            "Niste izabrali sliku.")
+            "Image not selected.")
         set(findobj('Tag','text_barcode'), 'ForegroundColor', 'red')
 else
     % ako je izabrao dobar fajl
@@ -180,21 +180,21 @@ else
         isFinish = false;
 %         msgbox('Greska u programu');
         set(findobj('Tag','text_barcode'),'String',...
-            "Greska u programu.")
+            "Program error.")
         set(findobj('Tag','text_barcode'), 'ForegroundColor', 'red')
     end
-% 
+% % 
     if(isFinish == true)
         % Ukoliko korisnik želi da dobije pop-up, to možemo uraditi
         % korišćenjem naredne linije
 %         waitfor(msgbox("Barkod sa slike je " + code + " i je rotiran za " + abs(round(angle)) + "°"));
         set(findobj('Tag','text_barcode'),'String',...
-            sprintf("Barkod sa slike je %s\ni rotiran je za %d°.", code, abs(round(angle))))
+            sprintf("Detected barcode is %s\nand it's rotated by %d°.", code, abs(round(angle))))
         set(findobj('Tag','text_barcode'), 'ForegroundColor', 'black')
     else
 %         waitfor(msgbox("Nazalost, barkod nije procitan."));
         set(findobj('Tag','text_barcode'),'String',...
-            "Nazalost, barkod nije procitan.")
+            "Unfortunately, barcode is not detected.")
         set(findobj('Tag','text_barcode'), 'ForegroundColor', 'red')
     end
     axes(handles.axes_image);
